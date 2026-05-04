@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sullivans ES – Prevent the Summer Slide</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a2456;
+    --blue: #1552a0;
+    --sky: #2980d4;
+    --light-blue: #d6eaf8;
+    --pale: #eaf4fd;
+    --white: #ffffff;
+    --accent: #f0c040;
+    --text: #102040;
+    --muted: #5a7090;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(10,36,86,0.13);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--pale);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, var(--sky) 100%);
+    color: var(--white);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='25' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='1'/%3E%3C/svg%3E") repeat;
+    pointer-events: none;
+  }
+
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 36px 24px 24px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .mascot-logo {
+    flex-shrink: 0;
+  }
+
+  .mascot-logo svg {
+    width: 100px;
+    height: 100px;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+  }
+
+  .header-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+  }
+
+  .header-text h1 span {
+    color: var(--accent);
+  }
+
+  .header-text p {
+    margin-top: 8px;
+    font-size: 1rem;
+    opacity: 0.85;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--navy);
+    border-top: 3px solid var(--accent);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
+  nav a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.82rem;
+    padding: 14px 14px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+  }
+
+  nav a:hover, nav a.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* ── HERO BANNER ── */
+  .hero-banner {
+    background: linear-gradient(120deg, var(--blue) 0%, var(--sky) 100%);
+    color: white;
+    text-align: center;
+    padding: 52px 24px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0; right: 0;
+    height: 48px;
+    background: var(--pale);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  .wave-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      white 28px,
+      white 30px
+    );
+  }
+
+  .hero-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 900;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+
+  .hero-banner h2 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--navy);
+    font-weight: 900;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 99px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  /* ── WELCOME CARD ── */
+  .welcome-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 36px 40px;
+    margin-bottom: 40px;
+    border-left: 6px solid var(--sky);
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+  }
+
+  .welcome-card .dolphin-icon {
+    flex-shrink: 0;
+    font-size: 4rem;
+    line-height: 1;
+  }
+
+  .welcome-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+
+  .welcome-card p {
+    line-height: 1.75;
+    color: #304060;
+    font-size: 1rem;
+  }
+
+  /* ── INFO GRID ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .info-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .info-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(10,36,86,0.18);
+  }
+
+  .info-card-header {
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    color: white;
+    padding: 20px 24px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .info-card-header .icon {
+    font-size: 1.8rem;
+  }
+
+  .info-card-header h4 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+  }
+
+  .info-card-body {
+    padding: 20px 24px 24px;
+  }
+
+  .info-card-body p {
+    color: #304060;
+    line-height: 1.65;
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+  }
+
+  .info-card-body .dsn {
+    background: var(--light-blue);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    color: var(--navy);
+    margin-bottom: 8px;
+    font-weight: 900;
+  }
+
+  .section-sub {
+    color: var(--muted);
+    margin-bottom: 28px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  /* ── GRADE GRID ── */
+  .grade-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 18px;
+    margin-bottom: 48px;
+  }
+
+  .grade-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px 16px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: var(--text);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .grade-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--sky), var(--navy));
+  }
+
+  .grade-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(10,36,86,0.2);
+  }
+
+  .grade-card .grade-emoji {
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .grade-card .grade-label {
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--navy);
+    letter-spacing: 0.2px;
+  }
+
+  .grade-card .grade-desc {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  /* ── LINKS ROW ── */
+  .quick-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+
+  .quick-link-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    color: var(--text);
+    border: 2px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .quick-link-card:hover {
+    border-color: var(--sky);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(10,36,86,0.15);
+  }
+
+  .quick-link-card .ql-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: var(--light-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  .quick-link-card .ql-text strong {
+    display: block;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+
+  .quick-link-card .ql-text span {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  /* ── SUPPLIES CARD ── */
+  .supplies-card {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    color: white;
+    border-radius: var(--radius);
+    padding: 30px 36px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    box-shadow: var(--shadow);
+  }
+
+  .supplies-card .icon { font-size: 3rem; flex-shrink: 0; }
+
+  .supplies-card h4 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  .supplies-card p {
+    opacity: 0.85;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 14px;
+    background: var(--accent);
+    color: var(--navy);
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .btn:hover { opacity: 0.85; }
+
+  /* ── FOOTER DISCLAIMER ── */
+  .disclaimer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.6);
+    font-size: 0.78rem;
+    line-height: 1.7;
+    padding: 24px;
+    text-align: center;
+  }
+
+  /* ── WAVE DIVIDER ── */
+  .wave {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .welcome-card { flex-direction: column; padding: 24px; }
+    .supplies-card { flex-direction: column; text-align: center; padding: 28px 20px; }
+    .header-inner { flex-direction: column; text-align: center; }
+    nav a { font-size: 0.75rem; padding: 12px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="mascot-logo">
+      <!-- Dolphin SVG mascot -->
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="58" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+        <!-- Body -->
+        <ellipse cx="62" cy="68" rx="36" ry="18" fill="#4fc3f7" transform="rotate(-20 62 68)"/>
+        <!-- Belly -->
+        <ellipse cx="58" cy="72" rx="20" ry="10" fill="#e1f5fe" transform="rotate(-20 58 72)"/>
+        <!-- Dorsal fin -->
+        <path d="M72 52 Q80 32 88 40 Q82 50 75 54Z" fill="#0288d1"/>
+        <!-- Tail -->
+        <path d="M28 78 Q18 68 14 78 Q20 82 28 78Z" fill="#0288d1"/>
+        <path d="M28 78 Q18 88 14 78" fill="#4fc3f7"/>
+        <!-- Snout -->
+        <path d="M94 60 Q104 56 106 62 Q104 66 94 64Z" fill="#4fc3f7"/>
+        <!-- Eye -->
+        <circle cx="88" cy="58" r="4" fill="white"/>
+        <circle cx="89" cy="58" r="2.2" fill="#01579b"/>
+        <circle cx="90" cy="57" r="0.8" fill="white"/>
+        <!-- Smile -->
+        <path d="M92 64 Q96 67 100 64" stroke="#01579b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <!-- Pectoral fin -->
+        <path d="M70 72 Q64 82 56 78 Q62 70 70 72Z" fill="#0288d1"/>
+        <!-- Water splash -->
+        <path d="M20 90 Q30 84 40 90 Q50 84 60 90 Q70 84 80 90" stroke="rgba(255,255,255,0.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Stars/bubbles -->
+        <circle cx="38" cy="46" r="2" fill="rgba(255,255,255,0.7)"/>
+        <circle cx="30" cy="38" r="1.5" fill="rgba(255,255,255,0.5)"/>
+        <circle cx="44" cy="36" r="1" fill="rgba(255,255,255,0.6)"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>DoDEA <span>The Sullivans</span><br>Elementary School</h1>
+      <p>🐬 Prevent the Summer Slide — 2025 Edition</p>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="active">🏠 Home</a>
+    <a href="#">🌟 PBIS</a>
+    <a href="#">📚 Reading Tips</a>
+    <a href="#">➕ Math Tips</a>
+    <a href="#">📅 Calendar</a>
+    <a href="#">🤝 PTO</a>
+    <a href="#">🏫 Specials</a>
+    <a href="#">🌐 Community</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero-banner">
+  <div class="wave-bg"></div>
+  <div class="hero-badge">🐬 2025–2026 School Year</div>
+  <h2>Prevent the <em>Summer Slide</em></h2>
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- WELCOME -->
+  <div class="welcome-card">
+    <div class="dolphin-icon">🐬</div>
+    <div>
+      <h3>Welcome to The Sullivans Elementary School's<br>Prevent the Summer Slide Website</h3>
+      <p>
+        On the following pages you can find information regarding important skills needed for success in your child's upcoming grade — both academic and social. The Specials link provides opportunities for summer learning in music, art, and Japanese culture.
+      </p>
+      <p style="margin-top:12px;">
+        Additionally, at the top of the page you'll find tips for reading and math, PBIS (Positive Behavior Interventions and Support), our PTO, and local community resources.
+      </p>
+    </div>
+  </div>
+
+  <!-- NEW TO SULLIVANS + SUPPLIES -->
+  <div class="info-grid">
+
+    <div class="info-card">
+      <div class="info-card-header">
+        <span class="icon">🆕</span>
+        <h4>New to The Sullivans ES?</h4>
+      </div>
+      <div class="info-card-body">
+        <p>Contact the front office to register for school. Our friendly staff are happy to help you get started as part of the Sullivans Dolphins family!</p>
+        <div class="dsn">📞 DSN Phone: <strong>243-4629</strong></div>
+        <a class="btn" href="#" style="margin-top:16px;">📄 Save the Date 25–26</a>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-header">
+        <span class="icon">🎒</span>
+        <h4>Supply Lists 2025–2026</h4>
+      </div>
+      <div class="info-card-body">
+        <p>Download the Pacific Region supply list for the upcoming 2025–2026 school year. Make sure your Dolphin is ready to swim into learning on Day 1!</p>
+        <a class="btn" href="#">📄 Download Supply List</a>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-header">
+        <span class="icon">📘</span>
+        <h4>About Our School</h4>
+      </div>
+      <div class="info-card-body">
+        <p>The Sullivans Elementary School is located at Commander Fleet Activities Yokosuka (CFAY), Japan — serving military-connected families with excellence and pride.</p>
+        <a class="btn" href="https://sullivans.pac.dodea.edu" target="_blank">🌐 Visit Main Website</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- GRADE SELECTOR -->
+  <h2 class="section-title">🐬 Select Your Child's Grade</h2>
+  <p class="section-sub">Please select the grade your child will be in during the 2025–2026 school year.</p>
+
+  <div class="grade-grid">
+    <a class="grade-card" href="#">
+      <span class="grade-emoji">🌱</span>
+      <div class="grade-label">Pre-K</div>
+      <div class="grade-desc">Ages 3–4</div>
+    </a>
+    <a class="grade-card" href="#">
+      <span class="grade-emoji">🎨</span>
+      <div class="grade-label">Kindergarten</div>
+      <div class="grade-desc">Age 5</div>
+    </a>
+    <a class="grade-card" href="#">
+      <span class="grade-emoji">⭐</span>
+      <div class="grade-label">First Grade</div>
+      <div class="grade-desc">Age 6</div>
+    </a>
+    <a class="grade-card" href="#">
+      <span class="grade-emoji">📖</span>
+      <div class="grade-label">Second Grade</div>
+      <div class="grade-desc">Age 7</div>
+    </a>
+    <a class="grade-card" href="#">
+      <span class="grade-emoji">🔢</span>
+      <div class="grade-label">Third Grade</div>
+      <div class="grade-desc">Age 8</div>
+    </a>
+    <a class="grade-card" href="#">
+      <span class="grade-emoji">🔬</span>
+      <div class="grade-label">Fourth Grade</div>
+      <div class="grade-desc">Age 9</div>
+    </a>
+    <a class="grade-card" href="#">
+      <span class="grade-emoji">🚀</span>
+      <div class="grade-label">Fifth Grade</div>
+      <div class="grade-desc">Age 10</div>
+    </a>
+    <a class="grade-card" href="#">
+      <span class="grade-emoji">🎭</span>
+      <div class="grade-label">Specials Classes</div>
+      <div class="grade-desc">Enrichment & MLL</div>
+    </a>
+  </div>
+
+  <!-- QUICK LINKS -->
+  <h2 class="section-title">🔗 Quick Links</h2>
+  <p class="section-sub">Everything you need, right at your fins.</p>
+
+  <div class="quick-links">
+    <a class="quick-link-card" href="#">
+      <div class="ql-icon">📘</div>
+      <div class="ql-text">
+        <strong>The Sullivans on Facebook</strong>
+        <span>Current events, news, and updates</span>
+      </div>
+    </a>
+    <a class="quick-link-card" href="https://sullivans.pac.dodea.edu/school-calendar" target="_blank">
+      <div class="ql-icon">📅</div>
+      <div class="ql-text">
+        <strong>School Calendar</strong>
+        <span>Monthly view + district dates</span>
+      </div>
+    </a>
+    <a class="quick-link-card" href="#">
+      <div class="ql-icon">📚</div>
+      <div class="ql-text">
+        <strong>Sullivans Library</strong>
+        <span>Resources, hours & catalog</span>
+      </div>
+    </a>
+    <a class="quick-link-card" href="https://sullivans.pac.dodea.edu" target="_blank">
+      <div class="ql-icon">🏫</div>
+      <div class="ql-text">
+        <strong>Main School Homepage</strong>
+        <span>Official DoDEA school site</span>
+      </div>
+    </a>
+    <a class="quick-link-card" href="#">
+      <div class="ql-icon">🤝</div>
+      <div class="ql-text">
+        <strong>Sullivans PTO</strong>
+        <span>Parent–Teacher Organization</span>
+      </div>
+    </a>
+    <a class="quick-link-card" href="#">
+      <div class="ql-icon">🌐</div>
+      <div class="ql-text">
+        <strong>Community Resources</strong>
+        <span>Local CFAY community support</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- PBIS CARD -->
+  <div class="supplies-card">
+    <div class="icon">🌟</div>
+    <div>
+      <h4>PBIS — Positive Behavior Interventions & Support</h4>
+      <p>The Sullivans ES Dolphins are PBIS All-Stars! Our school community is built on mutual respect, responsibility, and safety. Learn about our expectations and how to reinforce them at home this summer.</p>
+      <a class="btn" href="#">Learn About PBIS →</a>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER DISCLAIMER -->
+<div class="disclaimer">
+  <p>The contents of this site do not necessarily represent the official policy or position of the Department of Defense Education Activity (DoDEA). The appearance of hyperlinks does not constitute endorsement by DoDEA of non-U.S. Government sites or the information, products, or services contained therein.</p>
+  <p style="margin-top:10px; color:rgba(255,255,255,0.4);">© The Sullivans Elementary School · DoDEA Pacific · Commander Fleet Activities Yokosuka, Japan</p>
+</div>
+
+</body>
+</html>
